@@ -53,13 +53,31 @@ header {
     border-radius: 7px;
     
 }
+.outputContainer {
+    display: none;
+}
 
+h2 {
+    text-align: center;
+}
 .forecastContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     column-gap: 10px;
     
+}
+
+.dayOne, .dayTwo, .dayThree, .dayFour, .dayFive {
+    height: 100%;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    border: 3px solid rgb(130, 205, 240);
+    border-radius: 7px;
+    padding: 10px;
+    row-gap: 5px;
 }
 
 .dayOne {
@@ -85,18 +103,6 @@ header {
 .dayFive {
     grid-column: 5;
     grid-row: span 2;
-}
-
-.dayOne, .dayTwo, .dayThree, .dayFour, .dayFive {
-    height: 100%;
-    text-align: center;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    border: 3px solid rgb(130, 205, 240);
-    border-radius: 7px;
-    padding: 10px;
-    row-gap: 5px;
 }
 
 .day .row {

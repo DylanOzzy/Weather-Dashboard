@@ -13,20 +13,19 @@
     </header>
     <div class="searchContainer">
         <div class="search">
-            <label id="searchCity">Search:</label>
-            <input id="searchCity" type="text" autocomplete="on" placeholder="Enter City...">
+            <label>Search:</label>
+            <input id="searchCity" type="search" autocomplete="on" placeholder="Enter City...">
             <button id="searchBtn">Search</button>
-            <ul id="displaySearchQuery">
-                <li>History</li>
-                <li>More History</li>
+            <ul id="displaySearchHistory">  
             </ul>
         </div>
     </div>
-    <div >
+    <div class="outputContainer">
         <h2>5-Day Forecast</h2>
         <div class="forecastContainer row">
 
             <div class="day dayOne col">
+                <div class="date"></div>
                 <div class="row" id="icon"></div>
                 <div class="row" id="temp"></div>
                 <div class="row" id="wind"></div>
@@ -34,6 +33,7 @@
             </div>
 
             <div class="day dayTwo col">
+                <div class="date"></div>
                 <div class="row" id="icon"></div>
                 <div class="row" id="temp"></div>
                 <div class="row" id="wind"></div>
@@ -41,6 +41,7 @@
             </div>
 
             <div class="day dayThree col">
+                <div class="date"></div>
                 <div class="row" id="icon"></div>
                 <div class="row" id="temp"></div>
                 <div class="row" id="wind"></div>
@@ -48,6 +49,7 @@
             </div>
 
             <div class="day dayFour col">
+                <div class="date"></div>
                 <div class="row" id="icon"></div>
                 <div class="row" id="temp"></div>
                 <div class="row" id="wind"></div>
@@ -55,6 +57,7 @@
             </div>
 
             <div class="day dayFive col">
+                <div class="date"></div>
                 <div class="row" id="icon"></div>
                 <div class="row" id="temp"></div>
                 <div class="row" id="wind"></div>
