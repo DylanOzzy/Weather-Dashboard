@@ -22,7 +22,7 @@ const userLocationHandler = () => {
                 .then(function (data) {
                     const todaysIcon = data.list[0].weather[0].icon;
                     const todaysTemp = data.list[0].main.temp + '°';
-                    const todaysWind = data.list[0].wind.speed;
+                    const todaysWind = data.list[0].wind.speed + ' m/ph';
                     const todaysHumidity = data.list[0].main.humidity
                     $("#todaysIcon").append(`<img src="https://openweathermap.org/img/w/${todaysIcon}.png" alt="Weather Icon">`)
                     $("#todaysTemp").text('Temp: ' + todaysTemp);
@@ -140,7 +140,20 @@ const searchForecastHandler = () => {
                     console.log(data);
                     const searchedLocationLat = data.coord.lat;
                     const searchedLocationLon = data.coord.lon;
-                    const displayWeatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${searchedLocationLat}&lon=${searchedLocationLon}&appid=${apiKey}`;
+                    const displayWeatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${searchedLocationLat}&lon=${searchedLocationLon}&units=imperial&appid=${apiKey}`;
+
+                    fetch(displayWeatherUrl)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then (function (data) {
+                            console.log(data)
+                            // const forecastIcon = data.list[0].weather[0].icon;
+                            // const forecastTemp = data.list[0].main.temp + '°';
+                            // const forecastWind = data.list[0].wind.speed;
+                            // const forecastHumidity = data.list[0].main.humidity
+
+                        })
 
                 })
                 .catch(function (error) {
