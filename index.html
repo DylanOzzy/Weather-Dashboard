@@ -4,20 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
     <header>
         <h1>Weather Dashboard</h1>
+        <p id="userLocation"></p>
         <p id="timeDate"></p>
     </header>
-    <div class="searchContainer">
-        <div class="search">
-            <label>Search:</label>
-            <input id="searchCity" type="search" autocomplete="on" placeholder="Enter City...">
-            <button id="searchBtn">Search</button>
-            <ul id="displaySearchHistory">  
-            </ul>
+    <div class="container">
+        <div class="searchContainer">
+            <div class="search">
+                <label for="searchCity">Search:</label>
+                <input id="searchCity" type="text" autocomplete="on" placeholder="Enter City..." aria-modal="">
+                <button id="searchBtn">Search</button>
+                <ul id="displaySearchHistory">  
+                </ul>
+            </div>
+        </div>
+        <div class="todaysWeatherContainer">
+            <div class="col today">Todays Conditions</div>
+                <div class="row" id="todaysIcon"></div>
+                <div class="row" id="todaysTemp">Temp: </div>
+                <div class="row" id="todaysWind">Wind Speed: </div>
+                <div class="row" id="todaysHumidity">Humidity: </div>
+            </div>
         </div>
     </div>
     <div class="outputContainer">

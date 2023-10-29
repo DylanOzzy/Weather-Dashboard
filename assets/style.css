@@ -23,6 +23,13 @@ header {
     justify-content: center;
 }
 
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+}
+
 .search {
     display: flex;
     flex-direction: column;
@@ -53,6 +60,27 @@ header {
     border-radius: 7px;
     
 }
+
+.todaysWeatherContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 3px solid rgb(130, 205, 240);
+    padding: 10px;
+    border-radius: 7px;
+    width: 227px;
+    box-sizing: border-box;
+    
+}
+
+.todaysWeatherContainer .row {
+    padding: 5px;
+    border: 3px solid rgb(130, 205, 240);
+    border-radius: 7px;
+}
+
 .outputContainer {
     display: none;
 }
