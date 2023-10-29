@@ -21,12 +21,12 @@ const userLocationHandler = () => {
                 })
                 .then(function (data) {
                     const todaysIcon = data.list[0].weather[0].icon;
-                    const todaysTemp = data.list[0].main.temp + '°';
-                    const todaysWind = data.list[0].wind.speed + ' m/ph';
+                    const todaysTemp = data.list[0].main.temp;
+                    const todaysWind = data.list[0].wind.speed;
                     const todaysHumidity = data.list[0].main.humidity
                     $("#todaysIcon").append(`<img src="https://openweathermap.org/img/w/${todaysIcon}.png" alt="Weather Icon">`)
-                    $("#todaysTemp").text('Temp: ' + todaysTemp);
-                    $("#todaysWind").text('Wind Speed: ' + todaysWind);
+                    $("#todaysTemp").text('Temp: ' + todaysTemp + '°F');
+                    $("#todaysWind").text('Wind Speed: ' + todaysWind + ' m/ph');
                     $("#todaysHumidity").text('Humidity: ' + todaysHumidity + '%');
                 })
         })
@@ -56,7 +56,7 @@ const dayjsHandler = () => {
         today.text(dayjsObject.format('hh:mm A dddd, MMMM DD, YYYY '));
     };
     displayTimeDate ();
-}
+};
 dayjsHandler();
 
 
@@ -114,7 +114,7 @@ const searchQueryHandler = () => {
         const searchHistory = JSON.parse(localStorage.getItem("SearchHistory")) || [];
         displaySearchHistory(searchHistory);
     });
-}
+};
 searchQueryHandler();
 
 
@@ -148,10 +148,75 @@ const searchForecastHandler = () => {
                         })
                         .then (function (data) {
                             console.log(data)
-                            // const forecastIcon = data.list[0].weather[0].icon;
-                            // const forecastTemp = data.list[0].main.temp + '°';
-                            // const forecastWind = data.list[0].wind.speed;
-                            // const forecastHumidity = data.list[0].main.humidity
+                            const forecastDateDayOne = data.list[0].dt_txt;
+                            const dateObjectDayOne = new Date(forecastDateDayOne);
+                            const options = {
+                                month: '2-digit',
+                                day: '2-digit'
+                            };
+                            const formattedDateDayOne = dateObjectDayOne.toLocaleString('en-US', options);
+                            const forecastIconDayOne = data.list[0].weather[0].icon;
+                            const forecastTempDayOne = data.list[0].main.temp;
+                            const forecastWindDayOne = data.list[0].wind.speed;
+                            const forecastHumidityDayOne = data.list[0].main.humidity
+                            $('.dateDayOne').text(formattedDateDayOne);
+                            $('#iconDayOne').append(`<img src="https://openweathermap.org/img/w/${forecastIconDayOne}.png" alt="Weather Icon">`)
+                            $('#tempDayOne').text('Temp: ' + forecastTempDayOne + '°F');
+                            $('#windDayOne').text('Wind Speed: ' + forecastWindDayOne + ' m/ph');
+                            $('#humidityDayOne').text('Humidity: ' + forecastHumidityDayOne + '%');
+
+                            const forecastDateDayTwo = data.list[8].dt_txt;
+                            const dateObjectDayTwo = new Date(forecastDateDayTwo);
+                            const formattedDateDayTwo = dateObjectDayTwo.toLocaleString('en-US', options);
+                            const forecastIconDayTwo = data.list[8].weather[0].icon;
+                            const forecastTempDayTwo = data.list[8].main.temp;
+                            const forecastWindDayTwo = data.list[8].wind.speed;
+                            const forecastHumidityDayTwo = data.list[8].main.humidity;
+                            $('.dateDayTwo').text(formattedDateDayTwo);
+                            $('#iconDayTwo').append(`<img src="https://openweathermap.org/img/w/${forecastIconDayTwo}.png" alt="Weather Icon">`);
+                            $('#tempDayTwo').text('Temp: ' + forecastTempDayTwo + '°F');
+                            $('#windDayTwo').text('Wind Speed: ' + forecastWindDayTwo + ' m/ph');
+                            $('#humidityDayTwo').text('Humidity: ' + forecastHumidityDayTwo + '%');
+
+                            const forecastDateDayThree = data.list[16].dt_txt;
+                            const dateObjectDayThree = new Date(forecastDateDayThree);
+                            const formattedDateDayThree = dateObjectDayThree.toLocaleString('en-US', options);
+                            const forecastIconDayThree = data.list[16].weather[0].icon;
+                            const forecastTempDayThree = data.list[16].main.temp;
+                            const forecastWindDayThree = data.list[16].wind.speed;
+                            const forecastHumidityDayThree = data.list[16].main.humidity;
+                            $('.dateDayThree').text(formattedDateDayThree);
+                            $('#iconDayThree').append(`<img src="https://openweathermap.org/img/w/${forecastIconDayThree}.png" alt="Weather Icon">`);
+                            $('#tempDayThree').text('Temp: ' + forecastTempDayThree + '°F');
+                            $('#windDayThree').text('Wind Speed: ' + forecastWindDayThree + ' m/ph');
+                            $('#humidityDayThree').text('Humidity: ' + forecastHumidityDayThree + '%');
+
+                            const forecastDateDayFour = data.list[24].dt_txt;
+                            const dateObjectDayFour = new Date(forecastDateDayFour);
+                            const formattedDateDayFour = dateObjectDayFour.toLocaleString('en-US', options);
+                            const forecastIconDayFour = data.list[24].weather[0].icon;
+                            const forecastTempDayFour = data.list[24].main.temp;
+                            const forecastWindDayFour = data.list[24].wind.speed;
+                            const forecastHumidityDayFour = data.list[24].main.humidity;
+                            $('.dateDayFour').text(formattedDateDayFour);
+                            $('#iconDayFour').append(`<img src="https://openweathermap.org/img/w/${forecastIconDayFour}.png" alt="Weather Icon">`);
+                            $('#tempDayFour').text('Temp: ' + forecastTempDayFour + '°F');
+                            $('#windDayFour').text('Wind Speed: ' + forecastWindDayFour + ' m/ph');
+                            $('#humidityDayFour').text('Humidity: ' + forecastHumidityDayFour + '%');
+
+                            const forecastDateDayFive = data.list[32].dt_txt;
+                            const dateObjectDayFive = new Date(forecastDateDayFive);
+                            const formattedDateDayFive = dateObjectDayFive.toLocaleString('en-US', options);
+                            const forecastIconDayFive = data.list[32].weather[0].icon;
+                            const forecastTempDayFive = data.list[32].main.temp;
+                            const forecastWindDayFive = data.list[32].wind.speed;
+                            const forecastHumidityDayFive = data.list[32].main.humidity;
+                            $('.dateDayFive').text(formattedDateDayFive);
+                            $('#iconDayFive').append(`<img src="https://openweathermap.org/img/w/${forecastIconDayFive}.png" alt="Weather Icon">`);
+                            $('#tempDayFive').text('Temp: ' + forecastTempDayFive + '°F');
+                            $('#windDayFive').text('Wind Speed: ' + forecastWindDayFive + ' m/ph');
+                            $('#humidityDayFive').text('Humidity: ' + forecastHumidityDayFive + '%');
+
 
                         })
 
@@ -162,4 +227,4 @@ const searchForecastHandler = () => {
         }
     });
 };
-searchForecastHandler ();
+searchForecastHandler();
