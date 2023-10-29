@@ -3,7 +3,7 @@ const userLocationHandler = () => {
     const success = (position) => {
         const userLocationLat = position.coords.latitude;
         const userLocationLong = position.coords.longitude;
-        var userGeolocation = `http://api.openweathermap.org/geo/1.0/reverse?lat=${userLocationLat}&lon=${userLocationLong}&appid=1f3545ea7433a3f52cff6877a218c291`;
+        const userGeolocation = `http://api.openweathermap.org/geo/1.0/reverse?lat=${userLocationLat}&lon=${userLocationLong}&appid=1f3545ea7433a3f52cff6877a218c291`;
         const userLocation = document.getElementById("userLocation");
         
         fetch(userGeolocation)
@@ -14,14 +14,12 @@ const userLocationHandler = () => {
         .then(function (data) {
             var geoLocation = data[0].name;
             const userLocationWeather = `http://api.openweathermap.org/data/2.5/forecast?q=${geoLocation}&cnt=5&units=imperial&appid=1f3545ea7433a3f52cff6877a218c291`;
-            console.log(data)
             userLocation.textContent = geoLocation;
                 fetch(userLocationWeather)
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function (data) {
-                    console.log(data);
                     const todaysIcon = data.list[0].weather[0].icon;
                     const todaysTemp = data.list[0].main.temp + '°';
                     const todaysWind = data.list[0].wind.speed;
@@ -82,15 +80,32 @@ const searchQueryHandler = () => {
         $('#displaySearchHistory').empty();
         
         for (const search of searchHistory) {
-            const listItem = $("<li>").text(search);
-            $('#displaySearchHistory').prepend(listItem);
-            listItem.on('click', function() {
-                $('.outputContainer').css("display", "block");
-                const listItemValue = $(this).text();
-                $('#searchCity').val(listItemValue); // Set the value of the search input
-                $("#searchBtn").trigger("click", function(event) {
-                }); 
-            });
+            if (!$('#displaySearchHistory li:contains(' + search + ')').length) {
+                const listItem = $("<li>").text(search);
+                $('#displaySearchHistory').prepend(listItem);
+                
+                // these "listItem." add CSS attributes to the appended liste items 
+                listItem.css({
+                    "cursor": "pointer",
+                });
+                
+                listItem.hover(
+                    function () {
+                        listItem.css("background-color", "lightgray");
+                    },
+                    function () {
+                        listItem.css("background-color", "initial");
+                    }
+                );
+                
+                // this adds a click listener that enters the list items text value to the input value and submits the form. 
+                listItem.on('click', function () {
+                    $('.outputContainer').css("display", "block");
+                    const listItemValue = $(this).text();
+                    $('#searchCity').val(listItemValue); // Set the value of the search input
+                    $("#searchBtn").trigger("click");
+                });
+            }
         }
     }
 
@@ -103,9 +118,35 @@ const searchQueryHandler = () => {
 searchQueryHandler();
 
 
-
-
 const searchForecastHandler = () => {
+    $("#searchBtn").on("click", function (event) {
+        event.preventDefault();
 
-}
+        const searchedLocation = $('#searchCity').val();
+        const apiKey = '1f3545ea7433a3f52cff6877a218c291';
+
+        if (searchedLocation) {
+            const searchedLocationUrl = `http://api.openweathermap.org/data/2.5/weather?q=${searchedLocation}&units=imperial&appid=${apiKey}`;
+
+            fetch(searchedLocationUrl)
+                .then(function (response) {
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        console.error('Error: Unable to fetch weather data.');
+                    }
+                })
+                .then(function (data) {
+                    console.log(data);
+                    const searchedLocationLat = data.coord.lat;
+                    const searchedLocationLon = data.coord.lon;
+                    const displayWeatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${searchedLocationLat}&lon=${searchedLocationLon}&appid=${apiKey}`;
+
+                })
+                .catch(function (error) {
+                    console.error('Fetch error:', error);
+                });
+        }
+    });
+};
 searchForecastHandler ();
