@@ -3,7 +3,7 @@ const userLocationHandler = () => {
     const success = (position) => {
         const userLocationLat = position.coords.latitude;
         const userLocationLong = position.coords.longitude;
-        const userGeolocation = `http://api.openweathermap.org/geo/1.0/reverse?lat=${userLocationLat}&lon=${userLocationLong}&appid=1f3545ea7433a3f52cff6877a218c291`;
+        const userGeolocation = `https://api.openweathermap.org/geo/1.0/reverse?lat=${userLocationLat}&lon=${userLocationLong}&appid=1f3545ea7433a3f52cff6877a218c291`;
         const userLocation = document.getElementById("userLocation");
         
         fetch(userGeolocation)
@@ -13,7 +13,7 @@ const userLocationHandler = () => {
         
         .then(function (data) {
             var geoLocation = data[0].name;
-            const userLocationWeather = `http://api.openweathermap.org/data/2.5/forecast?q=${geoLocation}&cnt=5&units=imperial&appid=1f3545ea7433a3f52cff6877a218c291`;
+            const userLocationWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${geoLocation}&cnt=5&units=imperial&appid=1f3545ea7433a3f52cff6877a218c291`;
             userLocation.textContent = geoLocation;
                 fetch(userLocationWeather)
                 .then(function (response) {
@@ -63,9 +63,10 @@ dayjsHandler();
 const searchQueryHandler = () => {
     // this handles saving the search history to local storage if there is a value in the search input
     $("#searchBtn").on("click", function (event) {
-        event.preventDefault();
+        event.preventDefault(event);
         $('.outputContainer').css("display", "block");
         const searchCityValue = $('#searchCity').val();
+        $('#searchedCityName').text(searchCityValue + " 5-Day Forecast");
         if (searchCityValue !== "") {
             localStorage.setItem("Search", searchCityValue);
             let searchHistory = JSON.parse(localStorage.getItem("SearchHistory")) || [];
@@ -126,7 +127,7 @@ const searchForecastHandler = () => {
         const apiKey = '1f3545ea7433a3f52cff6877a218c291';
 
         if (searchedLocation) {
-            const searchedLocationUrl = `http://api.openweathermap.org/data/2.5/weather?q=${searchedLocation}&units=imperial&appid=${apiKey}`;
+            const searchedLocationUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchedLocation}&units=imperial&appid=${apiKey}`;
 
             fetch(searchedLocationUrl)
                 .then(function (response) {
@@ -140,7 +141,7 @@ const searchForecastHandler = () => {
                     console.log(data);
                     const searchedLocationLat = data.coord.lat;
                     const searchedLocationLon = data.coord.lon;
-                    const displayWeatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${searchedLocationLat}&lon=${searchedLocationLon}&units=imperial&appid=${apiKey}`;
+                    const displayWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchedLocationLat}&lon=${searchedLocationLon}&units=imperial&appid=${apiKey}`;
 
                     fetch(displayWeatherUrl)
                         .then(function (response) {
