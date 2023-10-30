@@ -26,7 +26,7 @@ const userLocationHandler = () => {
                     const todaysHumidity = data.list[0].main.humidity
                     $("#todaysIcon").append(`<img src="https://openweathermap.org/img/w/${todaysIcon}.png" alt="Weather Icon">`)
                     $("#todaysTemp").text('Temp: ' + todaysTemp + '°F');
-                    $("#todaysWind").text('Wind Speed: ' + todaysWind + ' m/ph');
+                    $("#todaysWind").text('Wind Speed: ' + todaysWind + ' mph');
                     $("#todaysHumidity").text('Humidity: ' + todaysHumidity + '%');
                 })
         })
@@ -64,6 +64,11 @@ const searchQueryHandler = () => {
     // this handles saving the search history to local storage if there is a value in the search input
     $("#searchBtn").on("click", function (event) {
         event.preventDefault(event);
+        $('#iconDayOne').empty();
+        $('#iconDayTwo').empty();
+        $('#iconDayThree').empty();
+        $('#iconDayFour').empty();
+        $('#iconDayFive').empty();
         $('.outputContainer').css("display", "block");
         const searchCityValue = $('#searchCity').val();
         $('#searchedCityName').text(searchCityValue + " 5-Day Forecast");
@@ -103,8 +108,13 @@ const searchQueryHandler = () => {
                 listItem.on('click', function () {
                     $('.outputContainer').css("display", "block");
                     const listItemValue = $(this).text();
-                    $('#searchCity').val(listItemValue); // Set the value of the search input
+                    $('#searchCity').val(listItemValue);
                     $("#searchBtn").trigger("click");
+                    $('#iconDayOne').empty();
+                    $('#iconDayTwo').empty();
+                    $('#iconDayThree').empty();
+                    $('#iconDayFour').empty();
+                    $('#iconDayFive').empty();
                 });
             }
         }
@@ -138,7 +148,6 @@ const searchForecastHandler = () => {
                     }
                 })
                 .then(function (data) {
-                    console.log(data);
                     const searchedLocationLat = data.coord.lat;
                     const searchedLocationLon = data.coord.lon;
                     const displayWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchedLocationLat}&lon=${searchedLocationLon}&units=imperial&appid=${apiKey}`;
@@ -148,7 +157,6 @@ const searchForecastHandler = () => {
                             return response.json();
                         })
                         .then (function (data) {
-                            console.log(data)
                             const forecastDateDayOne = data.list[0].dt_txt;
                             const dateObjectDayOne = new Date(forecastDateDayOne);
                             const options = {
@@ -163,7 +171,7 @@ const searchForecastHandler = () => {
                             $('.dateDayOne').text(formattedDateDayOne);
                             $('#iconDayOne').append(`<img src="https://openweathermap.org/img/w/${forecastIconDayOne}.png" alt="Weather Icon">`)
                             $('#tempDayOne').text('Temp: ' + forecastTempDayOne + '°F');
-                            $('#windDayOne').text('Wind Speed: ' + forecastWindDayOne + ' m/ph');
+                            $('#windDayOne').text('Wind Speed: ' + forecastWindDayOne + ' mph');
                             $('#humidityDayOne').text('Humidity: ' + forecastHumidityDayOne + '%');
 
                             const forecastDateDayTwo = data.list[8].dt_txt;
@@ -176,7 +184,7 @@ const searchForecastHandler = () => {
                             $('.dateDayTwo').text(formattedDateDayTwo);
                             $('#iconDayTwo').append(`<img src="https://openweathermap.org/img/w/${forecastIconDayTwo}.png" alt="Weather Icon">`);
                             $('#tempDayTwo').text('Temp: ' + forecastTempDayTwo + '°F');
-                            $('#windDayTwo').text('Wind Speed: ' + forecastWindDayTwo + ' m/ph');
+                            $('#windDayTwo').text('Wind Speed: ' + forecastWindDayTwo + ' mph');
                             $('#humidityDayTwo').text('Humidity: ' + forecastHumidityDayTwo + '%');
 
                             const forecastDateDayThree = data.list[16].dt_txt;
@@ -189,7 +197,7 @@ const searchForecastHandler = () => {
                             $('.dateDayThree').text(formattedDateDayThree);
                             $('#iconDayThree').append(`<img src="https://openweathermap.org/img/w/${forecastIconDayThree}.png" alt="Weather Icon">`);
                             $('#tempDayThree').text('Temp: ' + forecastTempDayThree + '°F');
-                            $('#windDayThree').text('Wind Speed: ' + forecastWindDayThree + ' m/ph');
+                            $('#windDayThree').text('Wind Speed: ' + forecastWindDayThree + ' mph');
                             $('#humidityDayThree').text('Humidity: ' + forecastHumidityDayThree + '%');
 
                             const forecastDateDayFour = data.list[24].dt_txt;
@@ -202,7 +210,7 @@ const searchForecastHandler = () => {
                             $('.dateDayFour').text(formattedDateDayFour);
                             $('#iconDayFour').append(`<img src="https://openweathermap.org/img/w/${forecastIconDayFour}.png" alt="Weather Icon">`);
                             $('#tempDayFour').text('Temp: ' + forecastTempDayFour + '°F');
-                            $('#windDayFour').text('Wind Speed: ' + forecastWindDayFour + ' m/ph');
+                            $('#windDayFour').text('Wind Speed: ' + forecastWindDayFour + ' mph');
                             $('#humidityDayFour').text('Humidity: ' + forecastHumidityDayFour + '%');
 
                             const forecastDateDayFive = data.list[32].dt_txt;
@@ -215,7 +223,7 @@ const searchForecastHandler = () => {
                             $('.dateDayFive').text(formattedDateDayFive);
                             $('#iconDayFive').append(`<img src="https://openweathermap.org/img/w/${forecastIconDayFive}.png" alt="Weather Icon">`);
                             $('#tempDayFive').text('Temp: ' + forecastTempDayFive + '°F');
-                            $('#windDayFive').text('Wind Speed: ' + forecastWindDayFive + ' m/ph');
+                            $('#windDayFive').text('Wind Speed: ' + forecastWindDayFive + ' mph');
                             $('#humidityDayFive').text('Humidity: ' + forecastHumidityDayFive + '%');
 
 
